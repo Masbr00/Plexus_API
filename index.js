@@ -1,15 +1,17 @@
 const express = require('express')
+const cors = require("cors");
 const bodyParser = require('body-parser')
 const app = express()
 const port = 3000
-const Pool = require('pg').Pool
-const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'db_plexus',
-    password: '1234',
-    port: 5432,
+
+const db = require("./app/model");
+db.sequelize.sync()
+    .then(() => {
+    console.log("Synced db.");
 })
+    .catch((err) => {
+    console.log("Failed to sync db: " + err.message);
+});
 
 app.use(bodyParser.json())
 app.use(
@@ -17,18 +19,30 @@ app.use(
         extended: true,
     })
 )
+
+var corsOptions = {
+    origin: "http://localhost:8081"
+    };
+
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// require("./app/route/register.route")(app)
 app.get('/', (request, response) => {
-    response.json({ info: 'Node.js, Express, and Postgres API' })
+    response.json({ message: "Welcome, what are you buyin'" })
 })
+
+require("./app/route/tutorial.routes")(app);
+require("./app/route/register.route")(app);
+
+app.listen(port, () => {
+    console.log(`App running on port ${port}.`)
+});
 
 app.use((req,res) => {
     res.status(404).json({
         success: false,
         message: "Url Not Found",
-        data: []
     })
-})
-
-app.listen(port, () => {
-    console.log(`App running on port ${port}.`)
-})
+});
