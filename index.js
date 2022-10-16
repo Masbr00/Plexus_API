@@ -35,6 +35,7 @@ app.get('/', (request, response) => {
 
 require("./app/route/tutorial.routes")(app);
 require("./app/route/register.route")(app);
+require("./app/route/login.route")(app);
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
