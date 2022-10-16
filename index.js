@@ -33,9 +33,9 @@ app.get('/', (request, response) => {
     response.json({ message: "Welcome, what are you buyin'" })
 })
 
-require("./app/route/tutorial.routes")(app);
 require("./app/route/register.route")(app);
 require("./app/route/login.route")(app);
+require("./app/route/userManager.route")(app);
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
