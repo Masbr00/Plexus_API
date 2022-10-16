@@ -1,39 +1,48 @@
 const db = require("../model");
 const Register = db.register;
+const config = require("../config/auth.config");
 
+var jwt = require("jsonwebtoken");
+var bcrypt = require("bcryptjs");
 
 // Retrieve all Tutorials from the database.
 exports.create = async (req, res) => {
-    const name = req.body.name;
-    const email = req.body.email;
-    const username = req.body.username;
-    const password = req.body.password;
-    const phone = req.body.phone;
+    const Name = req.body.name;
+    const Email = req.body.email;
+    const Username = req.body.username;
+    const Password = req.body.password;
+    const Phone = req.body.phone;
     
-    if (!name) {
+    if (!Name) {
         res.status(400).send({
             message: "Name cannot be empty"
         })
-    } else if (!password) {
+    } else if (!Password) {
         res.status(400).send({
             message: "Password cannot be empty"
         })
-    } else if (!phone) {
+    } else if (!Phone) {
         res.status(400).send({
             message: "Phone cannot be empty"
         })
-    } else if (!email) {
+    } else if (!Email) {
         res.status(400).send({
             message: "Email cannot be empty"
         })
-    } else if (!username) {
+    } else if (!Username) {
         res.status(400).send({
             message: "Username cannot be empty"
         })
     }
 
     try {
-        var data = await Register.create(req.body);
+        var data = await Register.create({
+            name: Name,
+            email: Email,
+            username: Username,
+            password: bcrypt.hashSync(Password, 8),
+            phone: Phone
+        });
         res.status(200).send({
             status: true,
             message: "New Account Has Been Registered",
