@@ -1,6 +1,5 @@
 const db = require("../model");
-const Register = db.register;
-const Op = db.Sequelize.Op;
+const Register = db.users;
 
 checkDupeUserOrEmail = async (req, res, next) => {
     //username

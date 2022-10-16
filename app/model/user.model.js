@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Register = sequelize.define("tb_users", {
+    const User = sequelize.define("tb_users", {
         name: {
             type: Sequelize.STRING
         },
@@ -18,5 +18,5 @@ module.exports = (sequelize, Sequelize) => {
     },{
         timestamps: true
     })
-    return Register;
+    return User;
 };

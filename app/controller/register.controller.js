@@ -1,8 +1,6 @@
 const db = require("../model");
-const Register = db.register;
-const config = require("../config/auth.config");
+const Register = db.users;
 
-var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
 // Retrieve all Tutorials from the database.
