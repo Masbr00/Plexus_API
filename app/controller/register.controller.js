@@ -49,7 +49,9 @@ exports.create = async (req, res) => {
         }
         res.status(200).send({
             status: true,
-            message: "New Account Has Been Registered"
+            message: "New Account Has Been Registered",
+            name: data.name,
+            player_id: data.id
         });
     } catch (error) {
         res.status(500).send({
@@ -58,21 +60,3 @@ exports.create = async (req, res) => {
             });
     }
 };
-
-exports.bikininventori = async(req,res) => {
-    try {
-        var inventory = await Inventory.create({
-            player_id: 83
-        })
-        res.status(200).send({
-            status: true,
-            message: "New Account Has Been Registered",
-            data: inventory
-        });
-    } catch (error) {
-        res.status(500).send({
-            status: false,
-            message: error.message || "server error"
-            });
-    }
-}

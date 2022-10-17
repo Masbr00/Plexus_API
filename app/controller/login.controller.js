@@ -59,6 +59,7 @@ exports.login = async (req, res) => {
         res.status(200).send({
             message: "Welcome",
             name: data.name,
+            player_id: data.id,
             accessToken: token
         })
 
