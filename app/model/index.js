@@ -21,5 +21,6 @@ db.sequelize = sequelize;
 db.register = require("./user.model")(sequelize, Sequelize);
 db.login = require("./user.model")(sequelize, Sequelize);
 db.updateProfil = require("./user.model")(sequelize, Sequelize);
+db.updatePassword = require("./user.model")(sequelize, Sequelize);
 
 module.exports = db;
