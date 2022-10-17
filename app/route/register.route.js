@@ -4,7 +4,8 @@ module.exports = app => {
     const {verifySignUp} = require("../middleware")
 
     router.post("/", [
-        verifySignUp.checkDupeUserOrEmail
+        verifySignUp.checkDupeUserOrEmail,
+        verifySignUp.checkValidUserOrEmail
     ],
     register.create);
 

@@ -1,5 +1,6 @@
 const db = require("../model");
-const Register = db.register;
+const Register = db.users;
+const Inventory = db.inventory;
 
 var bcrypt = require("bcryptjs");
 
@@ -41,10 +42,14 @@ exports.create = async (req, res) => {
             password: bcrypt.hashSync(Password, 8),
             phone: Phone
         });
+        if (data) {
+            var inventori = await Inventory.create({
+                player_id: data.id
+            })
+        }
         res.status(200).send({
             status: true,
-            message: "New Account Has Been Registered",
-            data
+            message: "New Account Has Been Registered"
         });
     } catch (error) {
         res.status(500).send({
@@ -53,3 +58,21 @@ exports.create = async (req, res) => {
             });
     }
 };
+
+exports.bikininventori = async(req,res) => {
+    try {
+        var inventory = await Inventory.create({
+            player_id: 83
+        })
+        res.status(200).send({
+            status: true,
+            message: "New Account Has Been Registered",
+            data: inventory
+        });
+    } catch (error) {
+        res.status(500).send({
+            status: false,
+            message: error.message || "server error"
+            });
+    }
+}

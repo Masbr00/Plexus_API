@@ -1,5 +1,5 @@
 const db = require("../model");
-const Login = db.login;
+const Login = db.users;
 const config = require("../config/auth.config");
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
@@ -58,9 +58,7 @@ exports.login = async (req, res) => {
 
         res.status(200).send({
             message: "Welcome",
-            id: data.id,
-            username: data.username,
-            email: data.email,
+            name: data.name,
             accessToken: token
         })
 

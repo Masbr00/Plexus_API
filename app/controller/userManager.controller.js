@@ -1,6 +1,6 @@
 const db = require("../model")
-const UpdateProfil = db.updateProfil;
-const UpdatePassword = db.updatePassword;
+const UpdateProfil = db.users;
+const UpdatePassword = db.users;
 
 var bcrypt = require("bcryptjs");
 
