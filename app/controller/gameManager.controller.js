@@ -7,8 +7,8 @@ const Detailachievment = db.detailachievment
 
 exports.getAllUser = async (req, res) => {
     const user = Users.findAll({
-        attributes: ["id", "name", "email", "phone"]
-    })
+        attributes: ['id', 'name', 'email', 'phone']
+    });
 
     if (!user) {
         res.status(500).send({
