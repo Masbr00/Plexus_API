@@ -33,10 +33,10 @@ exports.subgamedata = async (req, res) => {
             }
         });
         if (data) {
-            var newCoin = Coin + data.coin;
-            var newSilver = Silver + data.silver;
-            var newGold = Gold + data.gold;
-            var newXP = XP + data.xp;
+            var newCoin = Coin + parseInt(data.coin);
+            var newSilver = Silver + parseInt(data.silver);
+            var newGold = Gold + parseInt(data.gold);
+            var newXP = XP + parseInt(data.xp);
             // var newCoin = parseInt(Coin) + parseInt(data.coin);
             // var newSilver = parseInt(Silver) + parseInt(data.silver);
             // var newGold = parseInt(Gold) + parseInt(data.gold);
