@@ -1,15 +1,9 @@
 module.exports = {
-    HOST: "ec2-54-80-123-146.compute-1.amazonaws.com",
-    USER: "qzngpkbjncvrai",
-    PASSWORD: "5d2831c14a55b479b86732938d32d0ad0ee3eaa4f8db6a3c3b894acb7765e1ee",
-    DB: "deitg2b1o2l1cd",
+    HOST: "localhost",
+    USER: "postgres",
+    PASSWORD: "1234",
+    DB: "db_plexus",
     dialect: "postgres",
-    dialectOptions: {
-        ssl: {
-          require: true, // This will help you. But you will see nwe error
-          rejectUnauthorized: false // This line will fix new error
-        }
-    },
     pool: {
         max: 5,
         min: 0,
