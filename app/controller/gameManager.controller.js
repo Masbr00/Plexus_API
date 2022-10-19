@@ -218,9 +218,7 @@ exports.leaderboard = async (req, res) => {
 exports.playerAchievment = async (req, res) => {
     try {
         const User_id = req.params.user_id
-        var achievment = await sequelize.query(`select tb_users.name, tb_achievements.achievement from tb_users, tb_achievements, tb_listachievmentusers where tb_achievements.id = tb_listachievmentusers.achievment_id and tb_listachievmentusers.player_id = tb_users.id`)
-        // var achievment = await sequelize.query(`select tb_users.name, tb_achievements.achievement, tb_achievements.detail from tb_users, tb_achievements, tb_listachievmentusers where tb_achievements.id = tb_listachievmentusers.achievment_id and tb_listachievmentusers.player_id = tb_users.id group by tb_users.name, tb_achievements.achievement`)
-        // var achievment = await sequelize.query(`select tb_achievements.achievement, tb_achievements.detail from tb_achievements, tb_listachievmentusers where tb_achievements.id = tb_listachievmentusers.achievment_id and tb_listachievmentusers.player_id = ${User_id}`)
+        var achievment = await sequelize.query(`select tb_achievements.achievement, tb_achievements.detail from tb_achievements, tb_listachievmentusers where tb_achievements.id = tb_listachievmentusers.achievment_id and tb_listachievmentusers.player_id = ${User_id}`)
         var achievementMap = achievment[0].map(item => {
             return {
                 "achievement": item.achievement,
@@ -238,8 +236,38 @@ exports.playerAchievment = async (req, res) => {
         res.status(200).send({
             success: true,
             message: "achievement",
-            data: achievment
-            // data: achievementMap
+            data: achievementMap
+        })
+    } catch (error) {
+        res.status(404).send({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+exports.AllplayerAchievment = async (req, res) => {
+    try {
+        var achievment = await sequelize.query(`select tb_users.name, tb_achievements.achievement from tb_users, tb_achievements, tb_listachievmentusers where tb_achievements.id = tb_listachievmentusers.achievment_id and tb_listachievmentusers.player_id = tb_users.id order by tb_users.name`)
+
+        if (!achievment) {
+            res.status(500).send({
+                success: false,
+                message: "Player doesn't have any achievement"
+            })
+        }
+
+        var achievementMap = achievment[0].map(item => {
+            return {
+                "name": item.name,
+                "achievement": item.achievement
+            }
+        })
+
+        res.status(200).send({
+            success: true,
+            message: "achievement",
+            data: achievementMap
         })
     } catch (error) {
         res.status(404).send({
