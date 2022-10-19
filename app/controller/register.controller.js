@@ -47,7 +47,8 @@ exports.create = async (req, res) => {
                 player_id: data.id,
                 coin: 0,
                 silver: 0,
-                gold: 0
+                gold: 0,
+                xp: 0
             })
         }
         res.status(200).send({

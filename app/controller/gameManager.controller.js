@@ -185,7 +185,7 @@ exports.subgamedata = async (req, res) => {
 
 exports.leaderboard = async (req, res) => {
     try {
-        var leaderboard = await sequelize.query(`select tb_users.name, tb_inventories.player_id, tb_inventories.xp from tb_inventories, tb_users where tb_inventories.player_id = tb_users.id order by tb_inventories.xp DESC`)
+        var leaderboard = await sequelize.query(`select tb_users.name, tb_inventories.player_id, tb_inventories.xp from tb_inventories, tb_users where tb_inventories.player_id = tb_users.id order by tb_inventories.xp ASC`)
         var leaderboardMap = leaderboard[0].map(item => {
             return {
                 "name": item.name,
@@ -216,6 +216,13 @@ exports.playerAchievment = async (req, res) => {
                 "detail": item.detail
             }
         })
+
+        if (!achievment) {
+            res.status(500).send({
+                success: false,
+                message: "Player doesn't have any achievement"
+            })
+        }
 
         res.status(200).send({
             success: true,
