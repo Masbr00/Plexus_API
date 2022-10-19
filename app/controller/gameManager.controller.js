@@ -194,7 +194,7 @@ exports.subgamedata = async (req, res) => {
 
 exports.leaderboard = async (req, res) => {
     try {
-        var leaderboard = await sequelize.query(`select tb_users.name, tb_inventories.player_id, tb_inventories.xp from tb_inventories, tb_users where tb_inventories.player_id = tb_users.id order by tb_inventories.xp ASC`)
+        var leaderboard = await sequelize.query(`select tb_users.name, tb_inventories.player_id, tb_inventories.xp from tb_inventories, tb_users where tb_inventories.player_id = tb_users.id order by tb_inventories.xp DESC`)
         var leaderboardMap = leaderboard[0].map(item => {
             return {
                 "name": item.name,
@@ -218,7 +218,7 @@ exports.leaderboard = async (req, res) => {
 exports.playerAchievment = async (req, res) => {
     try {
         const User_id = req.params.user_id
-        var achievment = await sequelize.query(`select tb.users.name, tb_achievements.achievement, tb_achievements.detail from tb_users, tb_achievements, tb_listachievmentusers where tb_achievements.id = tb_listachievmentusers.achievment_id and tb_listachievmentusers.player_id = tb_users.id group by tb_users.name`)
+        var achievment = await sequelize.query(`select tb_users.name, tb_achievements.achievement, tb_achievements.detail from tb_users, tb_achievements, tb_listachievmentusers where tb_achievements.id = tb_listachievmentusers.achievment_id and tb_listachievmentusers.player_id = tb_users.id group by tb_users.name`)
         // var achievment = await sequelize.query(`select tb_achievements.achievement, tb_achievements.detail from tb_achievements, tb_listachievmentusers where tb_achievements.id = tb_listachievmentusers.achievment_id and tb_listachievmentusers.player_id = ${User_id}`)
         var achievementMap = achievment[0].map(item => {
             return {
