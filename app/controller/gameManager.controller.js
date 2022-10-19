@@ -2,6 +2,8 @@ const { sequelize } = require("../model");
 const db = require("../model")
 const GameManager = db.inventory;
 const Users = db.users;
+const Listachievment = db.achievment;
+const Detailachievment = db.detailachievment
 
 exports.subgamedata = async (req, res) => {
     const User_id = req.params.user_id;
@@ -47,13 +49,104 @@ exports.subgamedata = async (req, res) => {
                 }
             })
 
+            var cekUang = await GameManager.findOne({
+                where: {
+                    'player_id': User_id
+                }
+            })
+            if (cekUang) {
+                if (cekUang.silver >= 100 && cekUang.silver < 200) {
+                    var cekAchievment1 = await Listachievment.findOne({
+                        where: {
+                            'player_id': User_id,
+                            'achievment_id': 1
+                        }
+                    })
+                    if (!cekAchievment1) {
+                        Listachievment.create({
+                            'player_id': User_id,
+                            'achievment_id': 1
+                        })
+                    }
+                } 
+                if (cekUang.silver >= 200 && cekUang.silver < 400) {
+                    var cekAchievment2 = await Listachievment.findOne({
+                        where: {
+                            'player_id': User_id,
+                            'achievment_id': 2
+                        }
+                    })
+                    if (!cekAchievment2) {
+                        await Listachievment.create({
+                            'player_id': User_id,
+                            'achievment_id': 2
+                        })
+                    }
+                }
+                if (cekUang.silver >= 400) {
+                    var cekAchievment3 = await Listachievment.findOne({
+                        where: {
+                            'player_id': User_id,
+                            'achievment_id': 3
+                        }
+                    })
+                    if (!cekAchievment3) {
+                        await Listachievment.create({
+                            'player_id': User_id,
+                            'achievment_id': 3
+                        })
+                    }
+                }
+                if (cekUang.gold >= 100) {
+                    var cekAchievment4 = await Listachievment.findOne({
+                        where: {
+                            'player_id': User_id,
+                            'achievment_id': 4
+                        }
+                    })
+                    if (!cekAchievment4) {
+                        await Listachievment.create({
+                            'player_id': User_id,
+                            'achievment_id': 4
+                        })
+                    }
+                }
+                if (cekUang.gold >= 200 && cekUang.gold < 400) {
+                    var cekAchievment5 = await Listachievment.findOne({
+                        where: {
+                            'player_id': User_id,
+                            'achievment_id': 5
+                        }
+                    })
+                    if (!cekAchievment5) {
+                        await Listachievment.create({
+                            'player_id': User_id,
+                            'achievment_id': 5
+                        })
+                    }
+                }
+                if (cekUang.gold >= 400) {
+                    var cekAchievment6 = await Listachievment.findOne({
+                        where: {
+                            'player_id': User_id,
+                            'achievment_id': 6
+                        }
+                    })
+                    if (!cekAchievment6) {
+                        await Listachievment.create({
+                            'player_id': User_id,
+                            'achievment_id': 6
+                        })
+                    }
+                }
+            }
+
             if (!data) {
                 res.status(500).send({
                     success: false,
                     message: "Submit game data failed"
                 })
             }
-            
             res.status(200).send({
                 success: true,
                 message: "Submit game data success"
@@ -74,22 +167,6 @@ exports.subgamedata = async (req, res) => {
 
 exports.leaderboard = async (req, res) => {
     try {
-        // var leaderboard = await GameManager.findAll({
-        //     order: [["xp", "DESC"]]
-        // })
-
-        var users = await Users.findAll({
-            attributes: ["id", "name"]
-        })
-
-        var listusers = []
-        var totalData = users.length
-
-        for (let index = 0; index < totalData; index++) {
-            listusers.push(users[index])
-        }
-
-        // var leaderboard = sequelize.query(`select tb_users.name, tb_inventories.player_id, tb_inventories.xp from tb_inventories inner join on tb_users.id = tb_inventories.player_id`)
         var leaderboard = await sequelize.query(`select tb_users.name, tb_inventories.player_id, tb_inventories.xp from tb_inventories, tb_users where tb_inventories.player_id = tb_users.id order by tb_inventories.xp DESC`)
         var leaderboardMap = leaderboard[0].map(item => {
             return {
@@ -102,6 +179,30 @@ exports.leaderboard = async (req, res) => {
             success: true,
             message: "Leaderboard",
             data: leaderboardMap
+        })
+    } catch (error) {
+        res.status(404).send({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+exports.playerAchievment = async (req, res) => {
+    try {
+        const User_id = req.params.user_id
+        var achievment = await sequelize.query(`select tb_achievement.achievement, tb_achievement.detail from tb_achievement, tb_listachievmentusers where tb_achievement.id = tb_listachievmentusers.achievment_id and tb_listachievmentusers.player_id = ${User_id}`)
+        var achievementMap = achievment[0].map(item => {
+            return {
+                "achievement": item.achievement,
+                "detail": item.detail
+            }
+        })
+
+        res.status(200).send({
+            success: true,
+            message: "achievement",
+            data: achievementMap
         })
     } catch (error) {
         res.status(404).send({

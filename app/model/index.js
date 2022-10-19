@@ -18,6 +18,8 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+db.achievment = require("./listachievment.model")(sequelize, Sequelize);
+db.detailachievment = require("./achievment.model")(sequelize, Sequelize);
 db.users = require("./user.model")(sequelize, Sequelize);
 db.inventory = require("./inventory.model")(sequelize, Sequelize);
 
