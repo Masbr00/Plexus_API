@@ -14,8 +14,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         phone: {
             type: Sequelize.STRING
-        }
-        ,
+        },
         avatar: {
             type: Sequelize.STRING
         }

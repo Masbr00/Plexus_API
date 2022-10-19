@@ -3,6 +3,7 @@ module.exports = app => {
     const router = require("express").Router();
 
     router.post("/player/:user_id", gameManager.subgamedata);
+    router.get("/leaderboard", gameManager.leaderboard);
 
     app.use("/plexus/web/gamedata", router);
 };

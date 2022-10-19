@@ -1,3 +1,4 @@
+const { sequelize } = require("../model");
 const db = require("../model")
 const GameManager = db.inventory;
 const Users = db.users;
@@ -52,6 +53,7 @@ exports.subgamedata = async (req, res) => {
                     message: "Submit game data failed"
                 })
             }
+            
             res.status(200).send({
                 success: true,
                 message: "Submit game data success"
@@ -62,6 +64,45 @@ exports.subgamedata = async (req, res) => {
                 message: "Game data not found"
             })
         }
+    } catch (error) {
+        res.status(404).send({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+exports.leaderboard = async (req, res) => {
+    try {
+        // var leaderboard = await GameManager.findAll({
+        //     order: [["xp", "DESC"]]
+        // })
+
+        var users = await Users.findAll({
+            attributes: ["id", "name"]
+        })
+
+        var listusers = []
+        var totalData = users.length
+
+        for (let index = 0; index < totalData; index++) {
+            listusers.push(users[index])
+        }
+
+        // var leaderboard = sequelize.query(`select tb_users.name, tb_inventories.player_id, tb_inventories.xp from tb_inventories inner join on tb_users.id = tb_inventories.player_id`)
+        var leaderboard = await sequelize.query(`select tb_users.name, tb_inventories.player_id, tb_inventories.xp from tb_inventories, tb_users where tb_inventories.player_id = tb_users.id order by tb_inventories.xp DESC`)
+        var leaderboardMap = leaderboard[0].map(item => {
+            return {
+                "name": item.name,
+                "player_id": item.player_id,
+                "xp": item.xp
+            }
+        })
+        res.status(200).send({
+            success: true,
+            message: "Leaderboard",
+            data: leaderboardMap
+        })
     } catch (error) {
         res.status(404).send({
             success: false,
