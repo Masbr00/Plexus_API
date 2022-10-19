@@ -5,6 +5,24 @@ const Users = db.users;
 const Listachievment = db.achievment;
 const Detailachievment = db.detailachievment
 
+exports.getAllUser = async (req, res) => {
+    const user = Users.findAll({
+        attributes: ["id", "name", "email", "phone"]
+    })
+
+    if (!user) {
+        res.status(500).send({
+            success: false,
+            message: "Something wrong"
+        })
+    }
+    res.status(200).send({
+        success: true,
+        message: "User data",
+        data: user
+    })
+}
+
 exports.subgamedata = async (req, res) => {
     const User_id = req.params.user_id;
     var Coin = req.body.coin || 0;
