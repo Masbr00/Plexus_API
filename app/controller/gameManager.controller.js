@@ -218,7 +218,8 @@ exports.leaderboard = async (req, res) => {
 exports.playerAchievment = async (req, res) => {
     try {
         const User_id = req.params.user_id
-        var achievment = await sequelize.query(`select tb_achievements.achievement, tb_achievements.detail from tb_achievements, tb_listachievmentusers where tb_achievements.id = tb_listachievmentusers.achievment_id and tb_listachievmentusers.player_id = ${User_id}`)
+        var achievment = await sequelize.query(`select tb.users.name tb_achievements.achievement, tb_achievements.detail from tb_users, tb_achievements, tb_listachievmentusers where tb_achievements.id = tb_listachievmentusers.achievment_id and tb_listachievmentusers.player_id = tb_users.id group by tb_users.name`)
+        // var achievment = await sequelize.query(`select tb_achievements.achievement, tb_achievements.detail from tb_achievements, tb_listachievmentusers where tb_achievements.id = tb_listachievmentusers.achievment_id and tb_listachievmentusers.player_id = ${User_id}`)
         var achievementMap = achievment[0].map(item => {
             return {
                 "achievement": item.achievement,
@@ -236,7 +237,8 @@ exports.playerAchievment = async (req, res) => {
         res.status(200).send({
             success: true,
             message: "achievement",
-            data: achievementMap
+            data: achievment
+            // data: achievementMap
         })
     } catch (error) {
         res.status(404).send({
