@@ -44,7 +44,10 @@ exports.create = async (req, res) => {
         });
         if (data) {
             var inventori = await Inventory.create({
-                player_id: data.id
+                player_id: data.id,
+                coin: 0,
+                silver: 0,
+                gold: 0
             })
         }
         res.status(200).send({
