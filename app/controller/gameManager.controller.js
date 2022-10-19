@@ -33,20 +33,16 @@ exports.subgamedata = async (req, res) => {
             }
         });
         if (data) {
-            // var newCoin = Coin + parseInt(data.coin);
-            // var newSilver = Silver + parseInt(data.silver);
-            // var newGold = Gold + parseInt(data.gold);
-            // var newXP = XP + parseInt(data.xp);
             var newCoin = parseInt(Coin) + parseInt(data.coin);
             var newSilver = parseInt(Silver) + parseInt(data.silver);
             var newGold = parseInt(Gold) + parseInt(data.gold);
             var newXP = parseInt(XP) + parseInt(data.xp);
 
             data = await GameManager.update({
-                coin: 5,
-                silver: 5,
-                gold: 5,
-                xp: 5
+                coin: newCoin,
+                silver: newSilver,
+                gold: newGold,
+                xp: newXP
             },{
                 where: {
                     'player_id': User_id
