@@ -43,10 +43,10 @@ exports.subgamedata = async (req, res) => {
             var newXP = parseInt(XP) + parseInt(data.xp);
 
             data = await GameManager.update({
-                coin: parseInt(newCoin),
-                silver: parseInt(newSilver),
-                gold: parseInt(newGold),
-                xp: parseInt(newXP)
+                coin: 5,
+                silver: 5,
+                gold: 5,
+                xp: 5
             },{
                 where: {
                     'player_id': User_id
