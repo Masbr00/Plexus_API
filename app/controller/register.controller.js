@@ -4,7 +4,6 @@ const Inventory = db.inventory;
 
 var bcrypt = require("bcryptjs");
 
-// Retrieve all Tutorials from the database.
 exports.create = async (req, res) => {
     const Name = req.body.name;
     const Email = req.body.email;

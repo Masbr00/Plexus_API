@@ -1,0 +1,391 @@
+{
+	"info": {
+		"_postman_id": "8f600598-a8ec-4468-962f-8b921dc8ca4e",
+		"name": "API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14970964"
+	},
+	"item": [
+		{
+			"name": "Login&Register",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Jody Mardika",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "jodymardika@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "jody",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "081230873215",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://plexus-web.cyclic.app/plexus/web/register",
+							"protocol": "https",
+							"host": [
+								"plexus-web",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"plexus",
+								"web",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"protocolProfileBehavior": {
+						"strictSSL": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "Access-Control-Allow-Headers, x-access-token, Origin, Content-Type, Accept",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "useEmail",
+									"value": "true",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "user",
+									"value": "jodymardika@gmail.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "user",
+									"value": "jody",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://plexus-web.cyclic.app/plexus/web/login",
+							"protocol": "https",
+							"host": [
+								"plexus-web",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"plexus",
+								"web",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Manager",
+			"item": [
+				{
+					"name": "update profil",
+					"item": [
+						{
+							"name": "Update Profil",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Jody Mardika",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "081230873215",
+											"type": "text"
+										},
+										{
+											"key": "avatar",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "https://plexus-web.cyclic.app/plexus/web/update/profil/{:user_id}",
+									"protocol": "https",
+									"host": [
+										"plexus-web",
+										"cyclic",
+										"app"
+									],
+									"path": [
+										"plexus",
+										"web",
+										"update",
+										"profil",
+										"{:user_id}"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "change password",
+					"item": [
+						{
+							"name": "Change Pass",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "Access-Control-Allow-Headers, x-access-token, Origin, Content-Type, Accept",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "old_password",
+											"value": "1234",
+											"type": "text"
+										},
+										{
+											"key": "new_password",
+											"value": "0987",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://plexus-web.cyclic.app/plexus/web/update/password/{:user:id}",
+									"protocol": "https",
+									"host": [
+										"plexus-web",
+										"cyclic",
+										"app"
+									],
+									"path": [
+										"plexus",
+										"web",
+										"update",
+										"password",
+										"{:user:id}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Game Manager",
+			"item": [
+				{
+					"name": "Get All User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://plexus-web.cyclic.app/plexus/web/gamedata/player",
+							"protocol": "https",
+							"host": [
+								"plexus-web",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"plexus",
+								"web",
+								"gamedata",
+								"player"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit Game Data",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "coin",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "silver",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "gold",
+									"value": "7",
+									"type": "text"
+								},
+								{
+									"key": "xp",
+									"value": "8",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://plexus-web.cyclic.app/plexus/web/gamedata/player/{:user_id}",
+							"protocol": "https",
+							"host": [
+								"plexus-web",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"plexus",
+								"web",
+								"gamedata",
+								"player",
+								"{:user_id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Leaderboard",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://plexus-web.cyclic.app/plexus/web/gamedata/leaderboard",
+							"protocol": "https",
+							"host": [
+								"plexus-web",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"plexus",
+								"web",
+								"gamedata",
+								"leaderboard"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1 player achievment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://plexus-web.cyclic.app/plexus/web/gamedata/achievment/{:user_id}",
+							"protocol": "https",
+							"host": [
+								"plexus-web",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"plexus",
+								"web",
+								"gamedata",
+								"achievment",
+								"{:user_id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All player achievment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://plexus-web.cyclic.app/plexus/web/gamedata/achievment",
+							"protocol": "https",
+							"host": [
+								"plexus-web",
+								"cyclic",
+								"app"
+							],
+							"path": [
+								"plexus",
+								"web",
+								"gamedata",
+								"achievment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

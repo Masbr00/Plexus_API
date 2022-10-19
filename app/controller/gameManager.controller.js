@@ -1,14 +1,9 @@
 const { sequelize } = require("../model");
 const db = require("../model")
 const GameManager = db.inventory;
-const Users = db.users;
 const Listachievment = db.achievment;
-const Detailachievment = db.detailachievment
 
 exports.getAllUser = async (req, res) => {
-    // const user = Users.findAll({
-    //     attributes: ['id', 'name', 'email', 'phone']
-    // });
     var user = await sequelize.query(`select id, name, email, phone from tb_users`)
     var userMap = user[0].map(item => {
         return {
