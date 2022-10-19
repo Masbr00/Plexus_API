@@ -10,7 +10,7 @@ exports.getAllUser = async (req, res) => {
     //     attributes: ['id', 'name', 'email', 'phone']
     // });
     var user = await sequelize.query(`select id, name, email, phone from tb_users`)
-    var userMap = user.map(item => {
+    var userMap = user[0].map(item => {
         return {
             "id": item.id,
             "name": item.name,
