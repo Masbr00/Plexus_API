@@ -6,9 +6,18 @@ const Listachievment = db.achievment;
 const Detailachievment = db.detailachievment
 
 exports.getAllUser = async (req, res) => {
-    const user = Users.findAll({
-        // attributes: ['id', 'name', 'email', 'phone']
-    });
+    // const user = Users.findAll({
+    //     attributes: ['id', 'name', 'email', 'phone']
+    // });
+    var user = await sequelize.query(`select id, name, email, phone from tb_users`)
+    var userMap = user.map(item => {
+        return {
+            "id": item.id,
+            "name": item.name,
+            "phone": item.phone,
+            "email": item.email
+        }
+    })
 
     if (!user) {
         res.status(500).send({
@@ -19,7 +28,7 @@ exports.getAllUser = async (req, res) => {
     res.status(200).send({
         success: true,
         message: "User data",
-        data: user
+        data: userMap
     })
 }
 
