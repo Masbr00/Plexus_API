@@ -1,8 +1,15 @@
-const express = require('express')
+const express = require("express");
+const fileUpload = require("express-fileupload");
+const path = require("path");
 const cors = require("cors");
-const bodyParser = require('body-parser')
-const app = express()
-const port = process.env.port || 3000 
+const bodyParser = require("body-parser")
+const app = express();
+const port = process.env.port || 3000;
+
+app.use(fileUpload({
+    createParentPath: true
+}));
+app.use(express.static(path.join(__dirname, '/public/image/')));
 
 const db = require("./app/model");
 db.sequelize.sync()
@@ -13,12 +20,12 @@ db.sequelize.sync()
     console.log("Failed to sync db: " + err.message);
 });
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 app.use(
     bodyParser.urlencoded({
         extended: true,
     })
-)
+);
 
 var corsOptions = {
     origin: "http://localhost:8081"
@@ -31,7 +38,7 @@ app.use(express.urlencoded({ extended: true }));
 // require("./app/route/register.route")(app)
 app.get('/', (request, response) => {
     response.json({ message: "Welcome, what are you buyin'" })
-})
+});
 
 require("./app/route/register.route")(app);
 require("./app/route/login.route")(app);
@@ -48,3 +55,5 @@ app.use((req,res) => {
         message: "Url Not Found",
     })
 });
+
+module.exports.port = port
