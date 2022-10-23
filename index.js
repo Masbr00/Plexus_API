@@ -1,6 +1,6 @@
 const express = require("express");
 const fileUpload = require("express-fileupload");
-const path = require("path");
+// const path = require("path");
 const cors = require("cors");
 const bodyParser = require("body-parser")
 const app = express();
@@ -9,7 +9,7 @@ const port = process.env.port || 3000;
 app.use(fileUpload({
     createParentPath: true
 }));
-app.use(express.static(path.join(__dirname, '/public/image/'))); //lokasi ketika berjalan di localhost
+// app.use(express.static(path.join(__dirname, '/public/image/'))); //lokasi ketika berjalan di localhost
 // app.use(express.static(path.join(__dirname, 'var/task/app/controller/public/image/'))); //lokasi ketika berjalan di cyclic
 
 const db = require("./app/model");
