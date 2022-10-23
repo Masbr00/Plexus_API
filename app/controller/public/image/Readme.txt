@@ -1,0 +1,1 @@
+lokasi penyimpanan file upload pada api yang di letakkan pada cyclic
