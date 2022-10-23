@@ -72,7 +72,7 @@ exports.updateProfil = async (req, res) => {
         const newName = Name.replace(/\s/g, '_')
         const fileName = `${date}-${time}-${newName}.jpg`;
         // const filePath = __dirname + "../../../public/image/" + `${fileName}`; //lokasi ketika run di localhost
-        // const filePath = __dirname + "/public/image/" + `${fileName}`; //lokasi ketika run di cyclic
+        const filePath = __dirname + "/public/image/" + `${fileName}`; //lokasi ketika run di cyclic
         const allowedExtension = ['image/png','image/jpg','image/jpeg'];
 
         const data = await UpdateProfil.findOne({
@@ -83,12 +83,12 @@ exports.updateProfil = async (req, res) => {
         if(!allowedExtension.includes(Avatar.mimetype)){
             return res.status(422).send("Invalid Image");
         }
-        // Avatar.mv(filePath, (err) => {
-        //     if (err) {
-        //         return res.status(500).send(err);
-        //     }
-        //     return res.send({ status: "success", path: path });
-        // })
+        Avatar.mv(filePath, (err) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            // return res.send({ status: "success", path: path });
+        })
         if (!Name) {
             res.status(500).send({
                 success: false,
@@ -107,6 +107,7 @@ exports.updateProfil = async (req, res) => {
                 phone: Phone,
                 // avatar: `http://localhost:${portInfo.port}/${fileName}` // upload ketika run di localhost
                 // avatar: `https://plexus-web.cyclic.app/${fileName}` // upload ketika run di cyclic
+                avatar: filePath
             },{
                 where: {
                     'id': User_id
