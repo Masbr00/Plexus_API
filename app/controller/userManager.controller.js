@@ -83,12 +83,12 @@ exports.updateProfil = async (req, res) => {
         if(!allowedExtension.includes(Avatar.mimetype)){
             return res.status(422).send("Invalid Image");
         }
-        Avatar.mv(filePath, (err) => {
-            if (err) {
-                return res.status(500).send(err);
-            }
-            return res.send({ status: "success", path: path });
-        })
+        // Avatar.mv(filePath, (err) => {
+        //     if (err) {
+        //         return res.status(500).send(err);
+        //     }
+        //     return res.send({ status: "success", path: path });
+        // })
         if (!Name) {
             res.status(500).send({
                 success: false,
