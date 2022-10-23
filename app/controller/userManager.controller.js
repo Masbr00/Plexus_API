@@ -4,7 +4,6 @@ const UpdatePassword = db.users;
 const portInfo = require("../../index");
 const date = `${new Date().getDate()}${(new Date().getMonth() + 1)}${new Date().getFullYear()}`
 const time = `${new Date().getHours()}${new Date().getMinutes()}${new Date().getSeconds()}`
-const path = require('path');
 
 var bcrypt = require("bcryptjs");
 //ORIGINAL
@@ -88,7 +87,7 @@ exports.updateProfil = async (req, res) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            return res.send({ status: "success", path: path });
+            // return res.send({ status: "success", path: path });
         })
         if (!Name) {
             res.status(500).send({
@@ -106,7 +105,7 @@ exports.updateProfil = async (req, res) => {
             const data2 = await UpdateProfil.update({
                 name: Name,
                 phone: Phone,
-                // avatar: `http://localhost:${portInfo.port}/${fileName}` // upload ketika run di localhost
+                avatar: `http://localhost:${portInfo.port}/${fileName}` // upload ketika run di localhost
                 // avatar: `https://plexus-web.cyclic.app/${fileName}` // upload ketika run di cyclic
             },{
                 where: {

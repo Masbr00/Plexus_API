@@ -10,7 +10,7 @@ app.use(fileUpload({
     createParentPath: true
 }));
 // app.use(express.static(path.join(__dirname, '/public/image/'))); //lokasi ketika berjalan di localhost
-app.use(express.static(path.join(__dirname, 'var/task/app/controller//public/image/'))); //lokasi ketika berjalan di cyclic
+app.use(express.static(path.join(__dirname, 'var/task/app/controller/public/image/'))); //lokasi ketika berjalan di cyclic
 
 const db = require("./app/model");
 db.sequelize.sync()
