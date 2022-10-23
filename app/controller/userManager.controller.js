@@ -106,7 +106,7 @@ exports.updateProfil = async (req, res) => {
                 name: Name,
                 phone: Phone,
                 // avatar: `http://localhost:${portInfo.port}/${fileName}` // upload ketika run di localhost
-                avatar: `https://plexus-web.cyclic.app/${fileName}` // upload ketika run di cyclic
+                // avatar: `https://plexus-web.cyclic.app/${fileName}` // upload ketika run di cyclic
             },{
                 where: {
                     'id': User_id
