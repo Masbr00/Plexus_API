@@ -87,7 +87,7 @@ exports.updateProfil = async (req, res) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            // return res.send({ status: "success", path: path });
+            return res.send({ status: "success", path: path });
         })
         if (!Name) {
             res.status(500).send({
@@ -105,8 +105,8 @@ exports.updateProfil = async (req, res) => {
             const data2 = await UpdateProfil.update({
                 name: Name,
                 phone: Phone,
-                avatar: `http://localhost:${portInfo.port}/${fileName}` // upload ketika run di localhost
-                // avatar: `https://plexus-web.cyclic.app/${fileName}` // upload ketika run di cyclic
+                // avatar: `http://localhost:${portInfo.port}/${fileName}` // upload ketika run di localhost
+                avatar: `https://plexus-web.cyclic.app/${fileName}` // upload ketika run di cyclic
             },{
                 where: {
                     'id': User_id
