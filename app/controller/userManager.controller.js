@@ -72,7 +72,8 @@ exports.updateProfil = async (req, res) => {
         var Avatar = req.files.avatar;
         const newName = Name.replace(/\s/g, '_')
         const fileName = `${date}-${time}-${newName}.jpg`;
-        const filePath = __dirname + "../../../public/image/" + `${fileName}`;
+        // const filePath = __dirname + "../../../public/image/" + `${fileName}`; //lokasi ketika run di localhost
+        const filePath = __dirname + "../../public/image/" + `${fileName}`; //lokasi ketika run di localhost
         const allowedExtension = ['image/png','image/jpg','image/jpeg'];
 
         const data = await UpdateProfil.findOne({
