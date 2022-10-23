@@ -73,7 +73,7 @@ exports.updateProfil = async (req, res) => {
         const fileName = `${date}-${time}-${newName}.jpg`;
         // const filePath = __dirname + "../../../public/image/" + `${fileName}`; //lokasi ketika run di localhost
         // const filePath = __dirname + "/public/image/" + `${fileName}`; //lokasi ketika run di cyclic
-        const filePath = __dirname + "/var/task/app/controller/public/image/" + `${fileName}`; //lokasi ketika run di cyclic
+        const filePath = __dirname + "/public/image/" + `${fileName}`; //lokasi ketika run di cyclic
         const allowedExtension = ['image/png','image/jpg','image/jpeg'];
 
         const data = await UpdateProfil.findOne({
