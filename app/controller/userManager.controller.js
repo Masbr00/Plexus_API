@@ -88,6 +88,7 @@ exports.updateProfil = async (req, res) => {
             if (err) {
                 return res.status(500).send(err);
             }
+            return res.send({ status: "success", path: path });
         })
         if (!Name) {
             res.status(500).send({
