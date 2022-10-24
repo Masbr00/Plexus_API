@@ -73,7 +73,7 @@ exports.updateProfil = async (req, res) => {
         const fileName = `${date}-${time}-${newName}.jpg`;
         // const filePath = __dirname + "../../../public/image/" + `${fileName}`; //lokasi ketika run di localhost
         // const filePath = __dirname + "/public/image/" + `${fileName}`; //lokasi ketika run di cyclic
-        const filePath = __dirname + `/${fileName}`; //lokasi ketika run di cyclic
+        const filePath = __dirname + "/public/image/" + `${fileName}`; //lokasi ketika run di heroku
         const allowedExtension = ['image/png','image/jpg','image/jpeg'];
 
         const data = await UpdateProfil.findOne({
@@ -108,7 +108,7 @@ exports.updateProfil = async (req, res) => {
                 phone: Phone,
                 // avatar: `http://localhost:${portInfo.port}/${fileName}` // upload ketika run di localhost
                 // avatar: `https://plexus-web.cyclic.app/${fileName}` // upload ketika run di cyclic
-                avatar: filePath
+                avatar: `https://api-plexus.herokuapp.com/${fileName}`
             },{
                 where: {
                     'id': User_id

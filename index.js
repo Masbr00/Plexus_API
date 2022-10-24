@@ -1,6 +1,5 @@
 const express = require("express");
 const fileUpload = require("express-fileupload");
-// const path = require("path");
 const cors = require("cors");
 const bodyParser = require("body-parser")
 const app = express();
@@ -13,6 +12,7 @@ app.use(fileUpload({
 }));
 // app.use(express.static(path.join(__dirname, '/public/image/'))); //lokasi ketika berjalan di localhost
 // app.use(express.static(path.join(__dirname, 'var/task/app/controller/public/image/'))); //lokasi ketika berjalan di cyclic
+app.use(express.static(path.join(__dirname, '/app/app/controller/public/image/'))); //lokasi ketika berjalan di heroku
 
 const db = require("./app/model");
 db.sequelize.sync()
