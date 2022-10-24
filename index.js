@@ -11,8 +11,8 @@ global.__basedir = __dirname;
 app.use(fileUpload({
     createParentPath: true
 }));
-// app.use(express.static(path.join(__dirname, '/public/image/'))); //lokasi ketika berjalan di localhost
-app.use(express.static(path.join(__dirname, 'var/task/app/controller/public/image/'))); //lokasi ketika berjalan di cloud
+app.use(express.static(path.join(__dirname, '/public/image/'))); //lokasi ketika berjalan di localhost
+// app.use(express.static(path.join(__dirname, 'var/task/app/controller/public/image/'))); //lokasi ketika berjalan di cloud
 
 const db = require("./app/model");
 db.sequelize.sync()

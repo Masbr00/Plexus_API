@@ -14,8 +14,8 @@ exports.updateProfil = async (req, res) => {
         var Avatar = req.files.avatar;
         const newName = Name.replace(/\s/g, '_')
         const fileName = `${date}-${time}-${newName}.jpg`;
-        // const filePath = __dirname + "../../../public/image/" + `${fileName}`; //lokasi ketika run di localhost
-        const filePath = __dirname + "/public/image/" + `${fileName}`; //lokasi ketika run di cloud
+        const filePath = __dirname + "../../../public/image/" + `${fileName}`; //lokasi ketika run di localhost
+        // const filePath = __dirname + "/public/image/" + `${fileName}`; //lokasi ketika run di cloud
         const allowedExtension = ['image/png','image/jpg','image/jpeg'];
 
         const data = await UpdateProfil.findOne({
@@ -49,8 +49,7 @@ exports.updateProfil = async (req, res) => {
                 name: Name,
                 phone: Phone,
                 // avatar: `http://localhost:${portInfo.port}/${fileName}` // upload ketika run di localhost
-                // avatar: `https://plexus-web.cyclic.app/${fileName}` // upload ketika run di cyclic
-                avatar: `https://api-plexus.herokuapp.com/${fileName}`
+                avatar: `https://api-plexus.herokuapp.com/${fileName}` // upload ketika run di cloud // not work
             },{
                 where: {
                     'id': User_id
@@ -71,9 +70,7 @@ exports.updateProfil = async (req, res) => {
             res.status(200).send({
                 success: true,
                 message: "Account Updated",
-                data: previewUpdated,
-                avatar: filePath,
-                avatar_name: fileName
+                data: previewUpdated
             })
         } else {
             res.status(404).send({
