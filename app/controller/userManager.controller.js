@@ -108,7 +108,7 @@ exports.updateProfil = async (req, res) => {
                 phone: Phone,
                 // avatar: `http://localhost:${portInfo.port}/${fileName}` // upload ketika run di localhost
                 // avatar: `https://plexus-web.cyclic.app/${fileName}` // upload ketika run di cyclic
-                avatar: `https://api-plexus.herokuapp.com/${fileName}`
+                avatar: `https://api-plexus.herokuapp.com/image/${fileName}`
             },{
                 where: {
                     'id': User_id
@@ -129,7 +129,8 @@ exports.updateProfil = async (req, res) => {
             res.status(200).send({
                 success: true,
                 message: "Account Updated",
-                data: previewUpdated
+                data: previewUpdated,
+                avatar: filePath
             })
         } else {
             res.status(404).send({
