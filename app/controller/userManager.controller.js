@@ -6,63 +6,6 @@ const date = `${new Date().getDate()}${(new Date().getMonth() + 1)}${new Date().
 const time = `${new Date().getHours()}${new Date().getMinutes()}${new Date().getSeconds()}`
 
 var bcrypt = require("bcryptjs");
-//ORIGINAL
-// exports.updateProfil = async (req, res) => {
-//     const User_id = req.params.user_id;
-//     const Name = req.body.name;
-//     const Phone = req.body.phone;
-
-    // if (!Name) {
-    //     res.status(500).send({
-    //         success: false,
-    //         message: "Name cannot be empty"
-    //     })
-    // }
-    // if (!Phone) {
-    //     res.status(500).send({
-    //         success: false,
-    //         message: "Phone cannot be empty"
-    //     })
-    // }
-
-//     try {
-        // const data = await UpdateProfil.findOne({
-        //     where: {
-        //         'id': User_id
-        //     }
-        // });
-//         if (data) {
-            // const data2 = await UpdateProfil.update({
-            //     name: Name,
-            //     phone: Phone
-            // },{
-            //     where: {
-            //         'id': User_id
-            //     }
-            // })
-            // if (!data2) {
-            //     res.status(500).send({
-            //         success: false,
-            //         message: "Update Failed!"
-            //     })
-            // }
-            // res.status(200).send({
-            //     success: true,
-            //     message: "Account Updated"
-            // })
-//         } else {
-            // res.status(404).send({
-            //     success: false,
-            //     message: "Account Not Found"
-            // })
-//         }
-//     } catch (error) {
-//         res.status(500).send({
-//             success: false,
-//             message: error.message || "server error"
-//         })
-//     }
-// }
 exports.updateProfil = async (req, res) => {
     try {
         const User_id = req.params.user_id;
@@ -72,8 +15,7 @@ exports.updateProfil = async (req, res) => {
         const newName = Name.replace(/\s/g, '_')
         const fileName = `${date}-${time}-${newName}.jpg`;
         // const filePath = __dirname + "../../../public/image/" + `${fileName}`; //lokasi ketika run di localhost
-        // const filePath = __dirname + "/public/image/" + `${fileName}`; //lokasi ketika run di cyclic
-        const filePath = __dirname + `/${fileName}`; //lokasi ketika run di heroku
+        const filePath = __dirname + "/public/image/" + `${fileName}`; //lokasi ketika run di cloud
         const allowedExtension = ['image/png','image/jpg','image/jpeg'];
 
         const data = await UpdateProfil.findOne({
