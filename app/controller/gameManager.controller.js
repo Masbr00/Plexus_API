@@ -4,7 +4,7 @@ const GameManager = db.inventory;
 const Listachievment = db.achievment;
 
 exports.getAllUser = async (req, res) => {
-    var user = await sequelize.query(`select id, name, email, phone from tb_users`)
+    var user = await sequelize.query(`select id, name, email, phone, avatar from tb_users`)
     var userMap = user[0].map(item => {
         return {
             "id": item.id,
