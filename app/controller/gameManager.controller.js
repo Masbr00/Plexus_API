@@ -10,7 +10,8 @@ exports.getAllUser = async (req, res) => {
             "id": item.id,
             "name": item.name,
             "phone": item.phone,
-            "email": item.email
+            "email": item.email,
+            "avatar": item.avatar
         }
     })
 
